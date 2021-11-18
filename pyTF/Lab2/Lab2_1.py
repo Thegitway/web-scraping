@@ -10,7 +10,7 @@ import pandas
 import folium
 from flask import Flask, render_template
 
-Map = folium.Map(location=[33.5555, -7.7777], zoom_start=2)
+Map = folium.Map(location=[33.5555, -7.5777], zoom_start=15)
 Map.save('templates/Map.html')
 
 app = Flask(__name__)

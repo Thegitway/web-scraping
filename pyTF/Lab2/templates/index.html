@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Corona doc</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
+<script  src="charts.js"></script>
+</head>
+<body>
+<h1>Corona statistique</h1>
+<h2>Select your Country</h2>
+<form method="post" action="/">
+    <select name="country1" id="country1">
+        <option value="MAR" selected>Morocco</option>
+        <option value="FRA">France</option>
+        <option value="USA">USA</option>
+        <option value="ITA">Italy</option>
+    </select>
+    <select name="country2" id="country2">
+        <option value="MAR" >Morocco</option>
+        <option value="FRA"selected>France</option>
+        <option value="USA">USA</option>
+        <option value="ITA">Italy</option>
+    </select>
+    <select name="country3" id="country3">
+        <option value="MAR" >Morocco</option>
+        <option value="FRA">France</option>
+        <option value="USA"selected>USA</option>
+        <option value="ITA">Italy</option>
+    </select>
+    <input type="submit" value="ok"/>
+</form>
+<h2>Corona Cases</h2>
+<div>
+<canvas id="myChart1" ></canvas>
+
+</div>
+<script>
+    var dateLabel= '{{dateLabels}}';
+    dateLabel=dateLabel.split(',')
+    var dateLabels=[]
+            console.log(dateLabel)
+    dateLabel.forEach(element => {
+        dateLabels.push(element.substr(6,element.length-11))
+    });
+
+    var casesCountry1= '{{casesCountry1}}'
+    casesCountry1.split(',').forEach(element =>{
+        parseInt(element)
+    })
+
+    var casesCountry2='{{casesCountry2}}'
+    casesCountry2.split(',').forEach(element =>{
+        parseInt(element)
+    })
+    var casesCountry3= '{{casesCountry3}}'
+    casesCountry3.split(',').forEach(element =>{
+        parseInt(element)
+    })
+
+const ctx = document.getElementById('myChart1').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: dateLabels,
+        datasets: [{
+            label: '{{country1}}',
+            data: casesCountry1,
+            fill:true,
+      cubicInterpolationMode: 'monotone',
+
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+            ],
+            borderWidth: 1
+        },{
+            label: '{{country2}}',
+            data: casesCountry2,
+            fill:true,
+
+            borderColor: [
+                'rgba(99, 255, 132, 1)',
+            ],
+            borderWidth: 1
+        },{
+            label: '{{country3}}',
+            data: casesCountry3,
+            fill:true,
+
+            borderColor: [
+                'rgba(139, 99, 255, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+options: {
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: 'Corona cases'
+      }
+    },
+    scales: {
+      x: {
+        display: true,
+      },
+      y: {
+        display: true,
+
+      },
+
+    }
+  }
+
+});
+
+
+
+
+
+</script>
+</body>
+</html>
